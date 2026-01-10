@@ -118,8 +118,8 @@ def login():
         username = request.form.get('username')
         password = request.form.get('password')
         # Heroku environment variables से credentials
-        admin_user = os.environ.get('ADMIN_USERNAME', 'S4H1L')
-        admin_pass = os.environ.get('ADMIN_PASSWORD', '123123')
+        admin_user = os.environ.get('ADMIN_USERNAME', 'Haseeb')
+        admin_pass = os.environ.get('ADMIN_PASSWORD', 'haseebxd')
         
         if username == admin_user and password == admin_pass:
             session['logged_in'] = True
