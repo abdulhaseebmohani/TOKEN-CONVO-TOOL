@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login - Conversation Tool</title>
+
+    <style>
+
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        
+
+        * {
+
+            margin: 0;
+
+            padding: 0;
+
+            box-sizing: border-box;
+
+        }
+
+        body {
+
+            font-family: 'Inter', sans-serif;
+
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+
+            min-height: 100vh;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            padding: 20px;
+
+            position: relative;
+
+            overflow: hidden;
+
+        }
+
+        body::before {
+
+            content: '';
+
+            position: absolute;
+
+            width: 400px;
+
+            height: 400px;
+
+            background: rgba(102, 126, 234, 0.1);
+
+            border-radius: 50%;
+
+            top: -200px;
+
+            right: -200px;
+
+            animation: float 15s ease-in-out infinite;
+
+        }
+
+        body::after {
+
+            content: '';
+
+            position: absolute;
+
+            width: 350px;
+
+            height: 350px;
+
+            background: rgba(118, 75, 162, 0.08);
+
+            border-radius: 50%;
+
+            bottom: -150px;
+
+            left: -150px;
+
+            animation: float 12s ease-in-out infinite reverse;
+
+        }
+
+        @keyframes float {
+
+            0%, 100% { transform: translateY(0) translateX(0); }
+
+            50% { transform: translateY(-30px) translateX(30px); }
+
+        }
+
+        .login-container {
+
+            background: white;
+
+            border-radius: 20px;
+
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+
+            padding: 50px 45px;
+
+            width: 100%;
+
+            max-width: 450px;
+
+            position: relative;
+
+            z-index: 1;
+
+            transform: translateY(0);
+
+            animation: slideUp 0.6s ease-out;
+
+        }
+
+        @keyframes slideUp {
+
+            from {
+
+                opacity: 0;
+
+                transform: translateY(30px);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform: translateY(0);
+
+            }
+
+        }
+
+        .logo-container {
+
+            text-align: center;
+
+            margin-bottom: 35px;
+
+        }
+
+        .logo {
+
+            width: 80px;
+
+            height: 80px;
+
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+            border-radius: 18px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            margin: 0 auto 20px;
+
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+
+            transform: translateZ(0);
+
+            transition: transform 0.3s ease;
+
+        }
+
+        .logo:hover {
+
+            transform: translateY(-5px) scale(1.05);
+
+        }
+
+        .logo svg {
+
+            width: 40px;
+
+            height: 40px;
+
+            fill: white;
+
+        }
+
+        .login-header h1 {
+
+            color: #2d3748;
+
+            font-size: 28px;
+
+            font-weight: 700;
+
+            margin-bottom: 8px;
+
+            letter-spacing: -0.5px;
+
+        }
+
+        .login-header p {
+
+            color: #718096;
+
+            font-size: 14px;
+
+            font-weight: 400;
+
+        }
+
+        .error-message {
+
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+
+            color: white;
+
+            padding: 14px 18px;
+
+            border-radius: 12px;
+
+            margin-bottom: 22px;
+
+            font-size: 13px;
+
+            font-weight: 500;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            box-shadow: 0 6px 18px rgba(255, 107, 107, 0.3);
+
+        }
+
+        .form-group {
+
+            margin-bottom: 22px;
+
+        }
+
+        .form-group label {
+
+            display: block;
+
+            color: #4a5568;
+
+            font-weight: 600;
+
+            margin-bottom: 8px;
+
+            font-size: 13px;
+
+            letter-spacing: 0.3px;
+
+        }
+
+        .input-wrapper {
+
+            position: relative;
+
+        }
+
+        .input-icon {
+
+            position: absolute;
+
+            left: 16px;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            font-size: 18px;
+
+            opacity: 0.6;
+
+        }
+
+        .form-group input {
+
+            width: 100%;
+
+            padding: 14px 16px 14px 48px;
+
+            border: 2px solid #e2e8f0;
+
+            border-radius: 12px;
+
+            font-size: 14px;
+
+            transition: all 0.3s ease;
+
+            background: #f7fafc;
+
+            font-family: 'Inter', sans-serif;
+
+            font-weight: 400;
+
+            color: #2d3748;
+
+        }
+
+        .form-group input:focus {
+
+            outline: none;
+
+            border-color: #667eea;
+
+            background: white;
+
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+
+        }
+
+        .form-group input::placeholder {
+
+            color: #a0aec0;
+
+        }
+
+        .login-btn {
+
+            width: 100%;
+
+            padding: 16px;
+
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+            color: white;
+
+            border: none;
+
+            border-radius: 12px;
+
+            font-size: 15px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition: all 0.3s ease;
+
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+
+            font-family: 'Inter', sans-serif;
+
+            letter-spacing: 0.3px;
+
+            margin-top: 8px;
+
+        }
+
+        .login-btn:hover {
+
+            transform: translateY(-2px);
+
+            box-shadow: 0 12px 30px rgba(102, 126, 234, 0.4);
+
+        }
+
+        .login-btn:active {
+
+            transform: translateY(0);
+
+        }
+
+        .footer-text {
+
+            text-align: center;
+
+            margin-top: 30px;
+
+            color: #a0aec0;
+
+            font-size: 12px;
+
+            font-weight: 400;
+
+        }
+
+        @media (max-width: 480px) {
+
+            .login-container {
+
+                padding: 40px 30px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="login-container">
+
+        <div class="logo-container">
+
+            <div class="logo">
+
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+
+                    <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/>
+
+                </svg>
+
+            </div>
+
+            <div class="login-header">
+
+                <h1>Welcome Back</h1>
+
+                <p>Sign in to Conversation tool</p>
+
+            </div>
+
+        </div>
+
+        {% if error %}
+
+        <div class="error-message">
+
+            <span style="font-size: 18px;"></span>
+
+            <span>{{ error }}</span>
+
+        </div>
+
+        {% endif %}
+
+        <form method="POST" action="/login">
+
+            <div class="form-group">
+
+                <label for="username">Username</label>
+
+                <div class="input-wrapper">
+
+                    <span class="input-icon"></span>
+
+                    <input type="text" id="username" name="username" required placeholder="Enter your username" autocomplete="username">
+
+                </div>
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="password">Password</label>
+
+                <div class="input-wrapper">
+
+                    <span class="input-icon"></span>
+
+                    <input type="password" id="password" name="password" required placeholder="Enter your password" autocomplete="current-password">
+
+                </div>
+
+            </div>
+
+            <button type="submit" class="login-btn">Login</button>
+
+        </form>
+
+        <div class="footer-text">
+
+            © 2026 Automation • All Rights Reserved
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
